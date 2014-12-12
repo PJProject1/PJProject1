@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Stack;
 
 import static javafx.concurrent.Worker.State.FAILED;
 
@@ -29,8 +30,10 @@ public class SeranaBrowser extends JFrame {
 	private final JLabel lblStatus = new JLabel();
 
 	private final JButton settings = new JButton();
+	private final Stack<String> backStack = new Stack<String>();
+	private final Stack<String> forwardStack = new Stack<String>();
 
-	private final static JButton btnGo = new JButton("Go");
+	private final JButton btnGo = new JButton("Go");
 	private final JTextField txtURL = new JTextField();
 	private final JProgressBar progressBar = new JProgressBar();
 
@@ -198,6 +201,8 @@ public class SeranaBrowser extends JFrame {
 				}
 
 				engine.load(tmp);
+				//TODO THIS MIGHT CAUSE ISSUES
+				backStack.push(tmp);//THIS MIGHT CAUSE ISSUES, I AM NOT SURE
 			}
 		});
 	}
@@ -226,6 +231,5 @@ public class SeranaBrowser extends JFrame {
 			}
 		});
 		
-		System.out.println(btnGo.getSize());
 	}
 }
